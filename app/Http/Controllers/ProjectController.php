@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Models\Category;
 use Illuminate\Support\Str;
 use App\Models\Project;
 use Illuminate\Support\Facades\Storage;
@@ -36,7 +37,9 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('dashboard.create');
+        $categories = Category::all();
+
+        return view('dashboard.create', compact('categories'));
     }
 
     /**
@@ -73,7 +76,9 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('dashboard.edit', compact('project'));
+        $categories = Category::all();
+
+        return view('dashboard.edit', compact('project', 'categories'));
     }
 
     /**
